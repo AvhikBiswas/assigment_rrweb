@@ -10,14 +10,21 @@
  */
 rrweb.record({
   emit(event) {
-    const url = window.top.location.href;
-    const payload = {
-      url: url,
-      type: 'rrweb events',
-      data: JSON.stringify(event)
-    }
-
-    // Send message to background script
-    chrome.runtime.sendMessage(payload);
+    chrome.storage.local.get(["sessionId"], function (result) {
+      const idValue = result.sessionId;
+      if (idValue !== '') {
+        const url = window.top.location.href;
+        const payload = {
+          url: url,
+          type: 'rrweb events',
+          data: JSON.stringify(event)
+        };
+        // Send message to background script
+        chrome.runtime.sendMessage(payload);
+      } else {
+        console.log("SessionId is empty, emitting nothing.");
+      }
+    });
   }
 });
+

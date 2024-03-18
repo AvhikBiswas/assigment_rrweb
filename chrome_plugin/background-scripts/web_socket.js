@@ -34,7 +34,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
   chrome.storage.local.get(["sessionId"], function (result) {
     console.log("Value currently is " + result.sessionId);
-    const idValue = result.sessionId;
+    let idValue = result.sessionId;
 
     if (
       idValue !== "" &&

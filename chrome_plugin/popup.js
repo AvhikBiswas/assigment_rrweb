@@ -1,6 +1,6 @@
 async function fetchSession() {
     try {
-      const response = await fetch("http://localhost:3000/session");
+      const response = await fetch("http://localhost:3000/api/v1/session");
       if (!response.ok) {
         throw new Error("Failed to fetch session");
       }
